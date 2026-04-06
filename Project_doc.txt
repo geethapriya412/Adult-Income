@@ -1,0 +1,51 @@
+**Adult Income Classification — Production ML Pipeline & API**
+--------------------------------------------------------------
+
+Client → REST API → ML Pipeline → Prediction → JSON Response
+
+This project implements an end-to-end machine learning classification pipeline for Adult Income prediction and deploys it as a REST API using FastAPI. The system includes data preprocessing, categorical encoding with ColumnTransformer, model training, pipeline packaging, and real-time prediction endpoints with probability outputs.
+
+
+**Tech Stack:** Python, scikit-learn, Pandas, Decision Tree, Pipeline, OneHotEncoder, Joblib, REST API
+**Key Skills:** Classification modeling, categorical encoding, ML pipelines, model evaluation, production ML workflow
+
+python train.py
+
+pip install fastapi uvicorn scikit-learn pandas joblib
+
+Start API
+	uvicorn app:app --reload
+	
+Open:
+http://127.0.0.1:8000/docs
+
+
+Test JSON
+{
+  "age": 39,
+  "workclass": "Private",
+  "fnlwgt": 77516,
+  "education": "Bachelors",
+  "education_num": 13,
+  "marital_status": "Never-married",
+  "occupation": "Adm-clerical",
+  "relationship": "Not-in-family",
+  "race": "White",
+  "sex": "Male",
+  "capital_gain": 2174,
+  "capital_loss": 0,
+  "hours_per_week": 40,
+  "native_country": "United-States"
+}
+
+
+project becomes API-based when:
+
+Input JSON → API endpoint → ML pipeline → Prediction → JSON response
+
+
+If users/applications can call your model like this:
+
+POST /predict
+
+and get prediction output — it is an API-based ML project.
