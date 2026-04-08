@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adult Income Predictor</title>
+</head>
+<body>
+
+<h2>Adult Income Prediction</h2>
+
+<form id="form">
+
+<input id="age" placeholder="Age"><br><br>
+<input id="workclass" placeholder="Workclass"><br><br>
+<input id="fnlwgt" placeholder="Fnlwgt"><br><br>
+<input id="education" placeholder="Education"><br><br>
+<input id="education_num" placeholder="Education Num"><br><br>
+<input id="marital_status" placeholder="Marital Status"><br><br>
+<input id="occupation" placeholder="Occupation"><br><br>
+<input id="relationship" placeholder="Relationship"><br><br>
+<input id="race" placeholder="Race"><br><br>
+<input id="sex" placeholder="Sex"><br><br>
+<input id="capital_gain" placeholder="Capital Gain"><br><br>
+<input id="capital_loss" placeholder="Capital Loss"><br><br>
+<input id="hours_per_week" placeholder="Hours/Week"><br><br>
+<input id="native_country" placeholder="Country"><br><br>
+
+<button type="submit">Predict</button>
+
+</form>
+
+<h3 id="result"></h3>
+
+<script>
+document.getElementById("form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const data = {
+        age: +document.getElementById("age").value,
+        workclass: document.getElementById("workclass").value,
+        fnlwgt: +document.getElementById("fnlwgt").value,
+        education: document.getElementById("education").value,
+        education_num: +document.getElementById("education_num").value,
+        marital_status: document.getElementById("marital_status").value,
+        occupation: document.getElementById("occupation").value,
+        relationship: document.getElementById("relationship").value,
+        race: document.getElementById("race").value,
+        sex: document.getElementById("sex").value,
+        capital_gain: +document.getElementById("capital_gain").value,
+        capital_loss: +document.getElementById("capital_loss").value,
+        hours_per_week: +document.getElementById("hours_per_week").value,
+        native_country: document.getElementById("native_country").value
+    };
+
+    const res = await fetch("http://127.0.0.1:8000/predict", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    document.getElementById("result").innerText =
+        `Prediction: ${result.income_class} 
+         | Prob >50K: ${result["probability_>50K"]}`;
+});
+</script>
+
+</body>
+</html>
